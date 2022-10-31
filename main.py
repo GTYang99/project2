@@ -1,3 +1,4 @@
+# 安裝gpiozero套件
 from gpiozero import *
 from time import sleep
 
