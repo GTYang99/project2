@@ -48,6 +48,18 @@ class ColorCanvas(tk.Canvas):
             self.create_oval(cir_start_x,cir_start_y,cir_end_x,cir_end_y,fill='white',outline='white')
 
 class Windows(tk.Tk):
+    selected_convas = None
+    @classmethod
+    def get_select_convas(cls):
+        return cls.selected_convas
+
+    @classmethod
+    def set_select_State(cls,convas):
+        if cls.selected_convas is not None:
+            cls.selected_convas.state = ColorCanvas.OFF  
+        cls.selected_convas = convas
+        cls.selected_convas.state = ColorCanvas.ON
+
     def __init__(self):
         super().__init__()
         red = ColorCanvas(self,"red",width=100,height=100)
@@ -63,12 +75,13 @@ class Windows(tk.Tk):
         blue.bind('<ButtonRelease-1>',self.mouse_click)
         blue.grid(row=0, column=2)
 
+        Windows.set_select_convas(red)
+        select_convas = Windows.get_select_convas()
+        print(select_convas.rec_color)
+
 
     def mouse_click(self,event):
-        print(event.__dict__)
-        print(event.widget.rec_color)
-        # event.widget.create_rectangle(10,10,60,60,fill='white')
-        # event.widget.create_rectangle(20,20,50,50,fill='red')
+        Windows.set_select_convas(event.widget)
 
 
 
