@@ -1,3 +1,4 @@
+from sre_parse import State
 import tkinter as tk
 
 #建立一個ColorCanvas的物件，父母繼承tk.Canvas
@@ -8,6 +9,7 @@ class ColorCanvas(tk.Canvas):
         height = kwargs['height']
         super().__init__(parent,**kwargs)
         self.rec_color = rec_color
+        self.__state = False
         # space = 10
         space = width / 7
         rec_width = width - 2 * space
@@ -15,6 +17,15 @@ class ColorCanvas(tk.Canvas):
         self.create_rectangle(space, space, width - space, height - space,fill=self.rec_color)
         # self.create_rectangle(space,space,self.width - space,self.width - space,fill=self.rec_color)
         # print(rec_color)
+
+    # 建立物件屬性回傳
+    @property
+    def state(self):
+        return self.__state
+
+    @state.setter
+    def state(self,s):
+        self.__state = s
 
 class Windows(tk.Tk):
     def __init__(self):
@@ -30,6 +41,8 @@ class Windows(tk.Tk):
         red = ColorCanvas(self,"red",width=100,height=100)
         red.bind('<ButtonRelease-1>',self.mouse_click)
         red.grid(row=0, column=0)
+        red.state = True
+        print(f'red狀態:{red.state}')
 
         # green = tk.Canvas(self,width=70,height=70)
         # green.create_rectangle(10,10,60,60,fill="green")
