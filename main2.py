@@ -62,16 +62,19 @@ class Windows(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        red = ColorCanvas(self,"red",width=100,height=100)
+        # 製作一個frame，按鈕放進去
+        color_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
+        color_frame.pack(padx=50,pady=50) 
+        red = ColorCanvas(color_frame,"red",width=100,height=100)
         red.bind('<ButtonRelease-1>',self.mouse_click)
         red.grid(row=0, column=0)
         print(f'red狀態:{red.state}')
 
-        green = ColorCanvas(self,"green",width=100,height=100)       
+        green = ColorCanvas(color_frame,"green",width=100,height=100)       
         green.bind('<ButtonRelease-1>',self.mouse_click)        
         green.grid(row=0, column=1)        
 
-        blue = ColorCanvas(self,"blue",width=100,height=100)   
+        blue = ColorCanvas(color_frame,"blue",width=100,height=100)   
         blue.bind('<ButtonRelease-1>',self.mouse_click)
         blue.grid(row=0, column=2)
 
