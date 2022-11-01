@@ -73,7 +73,7 @@ class Windows(tk.Tk):
         color_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
         color_frame.pack(padx=50,pady=50) 
         # 製作frame的標題
-        tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16)).grid(row=0,column=0,columnspan=3,sticky=tk.W)
+        tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16)).grid(row=0,column=0,columnspan=3,sticky=tk.W,padx=10,pady=10)
         color_chose_label = tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16))
         color_chose_label.grid(row=0,column=0,columnspan=3)
         red = ColorCanvas(color_frame,"red",width=100,height=100)
@@ -93,8 +93,12 @@ class Windows(tk.Tk):
         Windows.set_select_convas(red)
         select_convas = Windows.get_select_convas()
         # print(select_convas.rec_color)
-        #---- end color_frame -----
-
+        #---- start light_state_frame -----
+        light_state_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
+        state_label = tk.Label(light_state_frame,text='目前燈光:',font=('ariel,16'),anchor=tk.W)
+        state_label.pack(fill=tk.X,padx=10,pady=10)
+        light_state_frame.pack(fill=tk.X,padx=50,pady=(0,30))
+        #---- end light_state_frame -----
 
     def mouse_click(self,event):
         Windows.set_select_convas(event.widget)
