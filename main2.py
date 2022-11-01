@@ -1,5 +1,7 @@
 from sre_parse import State
 import tkinter as tk
+from gpiozero import RGBLED
+from gpiozero import Button
 
 #建立一個ColorCanvas的物件，父母繼承tk.Canvas
 class ColorCanvas(tk.Canvas):
@@ -60,6 +62,15 @@ class Windows(tk.Tk):
         cls.selected_convas = convas
         cls.selected_convas.state = ColorCanvas.ON
 
+    light_state = False
+    @classmethod
+    def get_current_state(cls):
+        return cls.light_state
+
+    @classmethod
+    def set_current_state(cls,state):
+        cls.light_state = state
+
     def __init__(self):
         super().__init__()
         # ---- start title_frame -----
@@ -99,10 +110,16 @@ class Windows(tk.Tk):
         state_label.pack(fill=tk.X,padx=10,pady=10)
         light_state_frame.pack(fill=tk.X,padx=50,pady=(0,30))
         #---- end light_state_frame -----
+        
+        #gpiozero->一定要self
+        self.button = Button(18)
+        self.button.when_released = self.button_released
 
     def mouse_click(self,event):
         Windows.set_select_convas(event.widget)
 
+    def button_released(self):
+        print("button release")
 
 
 def main():
