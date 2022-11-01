@@ -54,7 +54,7 @@ class Windows(tk.Tk):
         return cls.selected_convas
 
     @classmethod
-    def set_select_State(cls,convas):
+    def set_select_convas(cls,convas):
         if cls.selected_convas is not None:
             cls.selected_convas.state = ColorCanvas.OFF  
         cls.selected_convas = convas
