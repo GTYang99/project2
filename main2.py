@@ -65,18 +65,21 @@ class Windows(tk.Tk):
         # 製作一個frame，按鈕放進去
         color_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
         color_frame.pack(padx=50,pady=50) 
+        color_chose_label = tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16))
+        color_chose_label.grid(row=0,column=0,columnspan=3)
         red = ColorCanvas(color_frame,"red",width=100,height=100)
         red.bind('<ButtonRelease-1>',self.mouse_click)
-        red.grid(row=0, column=0)
+        # gird放到第1行去
+        red.grid(row=1, column=0)
         print(f'red狀態:{red.state}')
 
         green = ColorCanvas(color_frame,"green",width=100,height=100)       
         green.bind('<ButtonRelease-1>',self.mouse_click)        
-        green.grid(row=0, column=1)        
+        green.grid(row=1, column=1)        
 
         blue = ColorCanvas(color_frame,"blue",width=100,height=100)   
         blue.bind('<ButtonRelease-1>',self.mouse_click)
-        blue.grid(row=0, column=2)
+        blue.grid(row=1, column=2)
 
         Windows.set_select_convas(red)
         select_convas = Windows.get_select_convas()
