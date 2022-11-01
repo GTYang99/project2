@@ -3,6 +3,10 @@ import tkinter as tk
 
 #建立一個ColorCanvas的物件，父母繼承tk.Canvas
 class ColorCanvas(tk.Canvas):
+    # 建立Class的property
+    # 建立一個Class內建的常數
+    ON = True
+    OFF = False
     def __init__(self,parent,rec_color,**kwargs):
         # 關鍵字引數解壓縮給物件內的width與height
         self.width = kwargs['width']
@@ -10,7 +14,7 @@ class ColorCanvas(tk.Canvas):
         super().__init__(parent,**kwargs)
         self.rec_color = rec_color
         # 給出初始的屬性
-        self.__state = False
+        self.__state = ColorCanvas.OFF
         # space = 10
         self.space = self.width / 7
         rec_width = self.width - 2 * self.space
@@ -33,6 +37,8 @@ class ColorCanvas(tk.Canvas):
         if self.__state == True:
             #多加小圓點
             print("多加小圓點")
+            rec_width = self.width - 2 * self.space
+            rec_heigh = self.height - 2 * self.space
 
 class Windows(tk.Tk):
     def __init__(self):
@@ -48,7 +54,7 @@ class Windows(tk.Tk):
         red = ColorCanvas(self,"red",width=100,height=100)
         red.bind('<ButtonRelease-1>',self.mouse_click)
         red.grid(row=0, column=0)
-        red.state = True
+        red.state = ColorCanvas.ON
         print(f'red狀態:{red.state}')
 
         # green = tk.Canvas(self,width=70,height=70)
