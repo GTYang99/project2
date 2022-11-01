@@ -62,9 +62,12 @@ class Windows(tk.Tk):
 
     def __init__(self):
         super().__init__()
+        #---- start color_frame -----
         # 製作一個frame，按鈕放進去
         color_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
         color_frame.pack(padx=50,pady=50) 
+        # 製作frame的標題
+        tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16)).grid(row=0,column=0,columnspan=3,sticky=tk.W)
         color_chose_label = tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16))
         color_chose_label.grid(row=0,column=0,columnspan=3)
         red = ColorCanvas(color_frame,"red",width=100,height=100)
@@ -83,7 +86,8 @@ class Windows(tk.Tk):
 
         Windows.set_select_convas(red)
         select_convas = Windows.get_select_convas()
-        print(select_convas.rec_color)
+        # print(select_convas.rec_color)
+        #---- end color_frame -----
 
 
     def mouse_click(self,event):
