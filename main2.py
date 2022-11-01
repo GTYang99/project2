@@ -5,18 +5,20 @@ import tkinter as tk
 class ColorCanvas(tk.Canvas):
     def __init__(self,parent,rec_color,**kwargs):
         # 關鍵字引數解壓縮給物件內的width與height
-        width = kwargs['width']
-        height = kwargs['height']
+        self.width = kwargs['width']
+        self.height = kwargs['height']
         super().__init__(parent,**kwargs)
         self.rec_color = rec_color
+        # 給出初始的屬性
         self.__state = False
         # space = 10
-        space = width / 7
-        rec_width = width - 2 * space
-        rec_heigh = width - 2 * space
-        self.create_rectangle(space, space, width - space, height - space,fill=self.rec_color)
+        self.space = self.width / 7
+        rec_width = self.width - 2 * self.space
+        rec_heigh = self.width - 2 * self.space
+        # self.create_rectangle(space, space, width - space, height - space,fill=self.rec_color)
         # self.create_rectangle(space,space,self.width - space,self.width - space,fill=self.rec_color)
         # print(rec_color)
+        self.create_rectangle(self.space, self.space, self.width - self.space, self.height - self.space,fill=self.rec_color)
 
     # 建立物件屬性回傳
     @property
@@ -26,6 +28,11 @@ class ColorCanvas(tk.Canvas):
     @state.setter
     def state(self,s):
         self.__state = s
+        self.delete()
+        self.create_rectangle(self.space, self.space, self.width - self.space, self.height - self.space,fill=self.rec_color)        
+        if self.__state == True:
+            #多加小圓點
+            print("多加小圓點")
 
 class Windows(tk.Tk):
     def __init__(self):
