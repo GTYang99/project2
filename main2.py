@@ -63,13 +63,13 @@ class Windows(tk.Tk):
         cls.selected_convas.state = ColorCanvas.ON
 
     light_state = False
-    @classmethod
-    def get_current_state(cls):
-        return cls.light_state
+    # @classmethod
+    # def get_current_state(cls):
+    #     return cls.light_state
 
-    @classmethod
-    def set_current_state(cls,state):
-        cls.light_state = state
+    # @classmethod
+    # def set_current_state(cls,state):
+    #     cls.light_state = state
 
     def __init__(self):
         super().__init__()
@@ -103,11 +103,12 @@ class Windows(tk.Tk):
 
         Windows.set_select_convas(red)
         select_convas = Windows.get_select_convas()
+        #---- end color_frame -----
         # print(select_convas.rec_color)
         #---- start light_state_frame -----
         light_state_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
-        state_label = tk.Label(light_state_frame,text='目前燈光:',font=('ariel,16'),anchor=tk.W)
-        state_label.pack(fill=tk.X,padx=10,pady=10)
+        self.state_label = tk.Label(light_state_frame,text='目前燈光:',font=('ariel,16'),anchor=tk.W)
+        self.state_label.pack(fill=tk.X,padx=10,pady=10)
         light_state_frame.pack(fill=tk.X,padx=50,pady=(0,30))
         #---- end light_state_frame -----
         
@@ -115,11 +116,32 @@ class Windows(tk.Tk):
         self.button = Button(18)
         self.button.when_released = self.button_released
 
+        #led
+        self.led = RGBLED(red=17, green=27, blue=22)
+        self.led.color=(0,0,0)
+
     def mouse_click(self,event):
         Windows.set_select_convas(event.widget)
 
     def button_released(self):
-        print("button release")
+        # print("button release")
+        # 修改釋放按鈕時候，會出現對應字樣
+        Windows.light_state = not Windows.light_state
+        if Windows.light_state == True:
+            print("開燈")
+            self.state_label.config(text="目前燈光:開")
+            canvas = Windows.get_select_convas()
+            if canvas.rec_color == "red":
+                # 燈號顏色的方法是(R,G,B)
+                self.led.color=(1,0,0)
+            elif canvas.rec_color == "green":
+                self.led.color=(0,1,0)
+            elif canvas.rec_color == "blue":
+                self.led.color=(0,0,1)
+        else:
+            print("關燈")
+            self.state_label.config(text="目前燈光:關")
+            self.led.color=(0,0,0)
 
 
 def main():
