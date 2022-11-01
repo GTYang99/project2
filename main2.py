@@ -38,7 +38,7 @@ class ColorCanvas(tk.Canvas):
             #多加小圓點
             print("多加小圓點")
             rec_width = self.width - 2 * self.space
-            # rec_height = self.height - 2 * self.space
+            rec_height = self.height - 2 * self.space
             cir_width = rec_width / 5
             cir_height = rec_height / 5
             cir_start_x = self.space + cir_width / 2
