@@ -62,6 +62,12 @@ class Windows(tk.Tk):
 
     def __init__(self):
         super().__init__()
+        # ---- start title_frame -----
+        # 建立一個tilte實體，再填內容
+        title_frame = tk.Frame(self)
+        title_frame.pack(pady=(30,0))
+        tk.Label(title_frame,text="RGB燈光顏色控制器",font=('Arial',20)).pack()   
+        # ----- end title_frame ------
         #---- start color_frame -----
         # 製作一個frame，按鈕放進去
         color_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
