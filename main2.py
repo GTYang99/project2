@@ -1,4 +1,3 @@
-from sre_parse import State
 import tkinter as tk
 from gpiozero import RGBLED
 from gpiozero import Button
