@@ -83,7 +83,7 @@ class Windows(tk.Tk):
         color_frame = tk.Frame(self,borderwidth=2,relief=tk.GROOVE)
         color_frame.pack(padx=50,pady=50) 
         # 製作frame的標題
-        tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16)).grid(row=0,column=0,columnspan=3,sticky=tk.W,padx=10,pady=10)
+        # tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16)).grid(row=0,column=0,columnspan=3,sticky=tk.W,padx=10,pady=10)
         color_chose_label = tk.Label(color_frame,text="請選擇顏色:",font=("Arial",16))
         color_chose_label.grid(row=0,column=0,columnspan=3)
         red = ColorCanvas(color_frame,"red",width=100,height=100)
